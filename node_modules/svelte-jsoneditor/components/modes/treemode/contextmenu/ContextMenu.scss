@@ -1,0 +1,112 @@
+@import '../../../../styles.scss';
+
+.jse-contextmenu {
+  box-shadow: var(--jse-controls-box-shadow);
+
+  font-family: var(--jse-font-family);
+  font-size: var(--jse-font-size);
+  background: var(--jse-context-menu-background);
+  color: var(--jse-context-menu-color);
+
+  button {
+    @include jsoneditor-button;
+
+    &:focus {
+      background: var(--jse-context-menu-background-highlight);
+    }
+  }
+
+  .jse-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: stretch;
+
+    div.jse-label {
+      flex: 1;
+      white-space: nowrap;
+      padding: $padding;
+      color: var(--jse-context-menu-color-disabled);
+      line-height: normal;
+    }
+
+    div.jse-tip {
+      flex: 1;
+      background: var(--jse-context-menu-tip-background);
+      color: var(--jse-context-menu-tip-color);
+      margin: $padding-half;
+      padding: $padding-half $padding;
+      font-size: 80%;
+      line-height: 1.3em;
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: $padding;
+      border-radius: $border-radius;
+
+      div {
+        vertical-align: middle;
+      }
+    }
+
+    button {
+      flex: 1;
+      white-space: nowrap;
+      padding: $padding;
+      color: inherit;
+
+      &:hover {
+        background: var(--jse-context-menu-background-highlight);
+      }
+
+      &:disabled {
+        color: var(--jse-context-menu-color-disabled);
+        background: unset;
+      }
+
+      .jse-insert {
+        $size: 18px;
+
+        display: inline-block;
+        position: relative;
+        width: $size;
+        height: $size;
+
+        font-family: var(--jse-font-family-mono);
+        font-weight: bold;
+        font-size: 16px; // fixed, to stay the same as the icons
+
+        .jse-quote,
+        .jse-plus {
+          position: absolute;
+          top: -4px;
+          left: 2px;
+          font-size: 24px;
+        }
+      }
+    }
+  }
+
+  .jse-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    &:not(:last-child) {
+      border-right: 1px solid var(--jse-context-menu-separator-color);
+    }
+
+    button {
+      text-align: left;
+      min-width: 130px;
+    }
+  }
+
+  .jse-separator {
+    width: 100%;
+    height: 1px;
+    background: var(--jse-context-menu-separator-color);
+  }
+}

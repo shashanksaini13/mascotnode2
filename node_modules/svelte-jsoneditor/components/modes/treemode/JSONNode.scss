@@ -1,0 +1,208 @@
+@import '../../../styles';
+@import 'json-node-selected-mixin';
+
+.jse-json-node {
+  position: relative;
+  color: var(--jse-text-color);
+
+  &.jse-root {
+    min-height: 100%;
+    padding-bottom: $contents-padding;
+    box-sizing: border-box;
+
+    > .jse-header-outer :global(.jse-context-menu-button),
+    > .jse-contents-outer > .jse-contents :global(.jse-context-menu-button) {
+      top: 0;
+      right: calc(-2px - var(--jse-context-menu-button-size));
+    }
+
+    > .jse-contents-outer > .jse-contents {
+      padding-left: 0;
+    }
+  }
+
+  &.jse-hovered {
+    > .jse-header-outer > .jse-header > .jse-meta,
+    .jse-props .jse-header,
+    .jse-items .jse-header,
+    .jse-props .jse-contents,
+    .jse-items .jse-contents,
+    .jse-footer {
+      background: var(--jse-hover-background-color);
+    }
+  }
+
+  $selector-height: 8px; // must be about half a line height
+
+  .jse-props,
+  .jse-items {
+    position: relative;
+  }
+
+  .jse-header-outer,
+  .jse-footer-outer {
+    display: flex;
+  }
+
+  .jse-header {
+    position: relative;
+
+    .jse-meta {
+      > .jse-meta-inner {
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+
+  .jse-contents-outer {
+    display: flex;
+  }
+
+  .jse-header,
+  .jse-contents {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .jse-contents {
+    padding-left: var(--jse-indent-size);
+  }
+
+  .jse-footer {
+    display: inline-flex;
+    padding-left: calc(var(--jse-indent-size) + $input-padding);
+  }
+
+  .jse-insert-selection-area {
+    visibility: hidden;
+    padding: 0 $padding-half;
+    flex: 1; // must fill all left over space at the right side of the editor, so you can click there
+
+    &.jse-inside {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    &.jse-after {
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+
+  &:hover > .jse-contents-outer .jse-insert-selection-area:not(.jse-selected),
+  .jse-header-outer:hover > .jse-insert-selection-area:not(.jse-selected),
+  .jse-footer-outer:hover .jse-insert-selection-area:not(.jse-selected) {
+    visibility: visible;
+    z-index: 1;
+  }
+
+  .jse-context-menu-button-anchor {
+    position: relative;
+  }
+
+  .jse-insert-area {
+    $height: 2px;
+    $height-half: 0.5 * $height;
+
+    display: flex;
+    position: relative;
+
+    max-width: 250px;
+    min-width: 100px;
+    height: 0;
+    margin-right: $padding-half;
+    outline: $height-half solid; // color depends on hovered/selected/inactive+selected
+
+    :global(.jse-context-menu-button) {
+      right: -$height-half;
+      background: var(--jse-selection-background-color);
+    }
+
+    &.jse-hovered {
+      outline-color: var(--jse-selection-background-color);
+    }
+  }
+
+  @include json-node-selected-mixin(
+    var(--jse-selection-background-color),
+    var(--jse-context-menu-button-background),
+    var(--jse-context-menu-button-background-highlight)
+  );
+}
+
+// lighter selection color when the editor doesn't have focus
+:global(.jse-main:not(.jse-focus)) {
+  .jse-json-node {
+    @include json-node-selected-mixin(
+      var(--jse-selection-background-light-color),
+      var(--jse-selection-background-color),
+      var(--jse-selection-background-color)
+    );
+  }
+}
+
+.jse-expand {
+  width: var(--jse-indent-size);
+  padding: 0;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: var(--jse-delimiter-color);
+  font-size: var(--jse-font-size-mono);
+  height: var(--jse-line-height);
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.jse-meta,
+.jse-separator,
+.jse-index,
+.jse-bracket {
+  vertical-align: top;
+  color: var(--jse-delimiter-color);
+}
+
+.jse-index {
+  padding: 0 $padding-half;
+}
+
+.jse-bracket {
+  padding: 0 2px;
+
+  &.jse-expanded {
+    padding-right: $padding;
+  }
+}
+
+.jse-tag {
+  border: none;
+  font-size: 80%;
+  font-family: var(--jse-font-family);
+  color: var(--jse-tag-color);
+  background: var(--jse-tag-background);
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  padding: 0 4px;
+  line-height: normal;
+  margin: 1px 0;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &.jse-expanded {
+    opacity: 0.7;
+    cursor: inherit;
+  }
+}
+
+.jse-identifier {
+  vertical-align: top;
+  position: relative;
+}

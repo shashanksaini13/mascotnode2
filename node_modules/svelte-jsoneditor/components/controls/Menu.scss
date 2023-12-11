@@ -1,0 +1,83 @@
+@import '../../styles';
+
+.jse-menu {
+  background: var(--jse-theme-color);
+  border-bottom: 1px solid var(--jse-theme-color);
+  color: var(--jse-menu-color);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  position: relative;
+
+  // FIXME: should utilize the generic styling in styles.scss
+  .jse-button {
+    width: var(--jse-menu-button-size);
+    height: var(--jse-menu-button-size);
+    border: none;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    padding: $padding-half;
+    margin: 0;
+    border-radius: 0;
+
+    &:hover,
+    &:focus {
+      background: var(--jse-theme-color-highlight);
+    }
+
+    &:disabled {
+      color: var(--jse-menu-color);
+      opacity: 0.5;
+
+      background: transparent;
+    }
+
+    &.jse-group-button {
+      $group-button-color: var(--jse-menu-color);
+
+      border: 1px solid $group-button-color;
+      &:not(.jse-last) {
+        border-right: none;
+      }
+
+      padding: 0;
+      margin: $padding-half 0;
+      height: calc(var(--jse-menu-button-size) - var(--jse-padding));
+      width: 40px;
+
+      &.jse-first {
+        margin-left: $padding-half;
+      }
+
+      &.jse-last {
+        margin-right: $padding-half;
+      }
+
+      &:hover,
+      &:focus {
+        background: var(--jse-theme-color-highlight);
+      }
+
+      &.jse-selected {
+        background: $group-button-color;
+        color: var(--jse-theme-color);
+      }
+    }
+  }
+
+  .jse-space {
+    flex: 1;
+  }
+
+  .jse-separator {
+    $margin: 3px;
+
+    background: var(--jse-menu-color);
+    opacity: 0.3;
+    box-sizing: border-box;
+    width: 1px;
+    height: calc(var(--jse-menu-button-size) - 2 * $margin);
+    margin: $margin;
+  }
+}

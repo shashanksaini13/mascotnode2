@@ -1,0 +1,25 @@
+@import '../../styles';
+
+.jse-header {
+  display: flex;
+  background: var(--jse-theme-color);
+  color: var(--jse-menu-color);
+
+  .jse-title {
+    flex: 1;
+    padding: $input-padding;
+    vertical-align: middle;
+  }
+
+  button {
+    border: none;
+    background: transparent;
+    min-width: 32px;
+    color: inherit;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
